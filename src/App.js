@@ -1,23 +1,45 @@
-import logo from './logo.svg';
 import './App.css';
+import React, {useState, useEffect} from 'react';
+import { getTrendingTracksCover  } from './api/getRandomTrendingTracksCover'
 
+const appName = 'my-app-l3';
+const host = 'https://discovery-d.mainnet.audius.radar.tech/v1/tracks/trending?app_name=123test';
 function App() {
+  const [data, setData] = useState([]);
+
+  useEffect(() => {
+    // fetch(host)
+    // .then((res) => {
+    //   return res.json()
+    // })
+    // .then(data => {
+    //   setData(data.data)
+    //   console.log('res', data);
+    // })
+    // const updataData = async () => {
+    //   const newData = await getTrendingTracks()
+    //   setData(newData)
+    // }
+    // updataData()
+    getTrendingTracksCover().then(setData)
+  }, [])
+
   return (
     <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+      {/* <pre>{JSON.stringify(data, null, 2)}</pre> */}
+      <div>
+        {
+         // data.map((dataItem) => {
+            // {console.log(dataItem);}
+            // <img src={dataItem.artwork['480x480']} />
+              <div>
+                 <img src={data} />
+                 {/* <p>{dataItem?.genre}</p> */}
+              </div>
+            
+          }
+        
+      </div>
     </div>
   );
 }
